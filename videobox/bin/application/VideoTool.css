@@ -1,0 +1,11 @@
+#tab{
+    -fx-text-align: center;
+    -fx-font-style: italic;
+    -fx-background-color: antiquewhite;
+}
+
+.button{
+    -fx-text-align: center;
+    -fx-font-style: italic;
+    -fx-background-color: antiquewhite;
+}

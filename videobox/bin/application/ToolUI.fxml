@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitMenuButton?>
@@ -14,11 +15,10 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.media.MediaView?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-border-color: #FFB6C1; -fx-border-width: 5px;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller">
   <tabs>
-    <Tab text="视频转码     ">
+    <Tab id="tab" fx:id="tab1" text="视频转码     ">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -28,8 +28,8 @@
                      </image>
                   </ImageView>
                   <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;" />
-                  <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="Output" />
-                  <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="Input" />
+                  <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                  <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
                   <FlowPane layoutX="383.0" layoutY="53.0" prefHeight="290.0" prefWidth="182.0">
                      <children>
                         <SplitMenuButton mnemonicParsing="false" prefHeight="35.0" prefWidth="177.0" text="视频格式">
@@ -73,14 +73,14 @@
                   </FlowPane>
                   <StackPane layoutX="45.0" layoutY="65.0" prefHeight="248.0" prefWidth="261.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <MediaView fitHeight="200.0" fitWidth="200.0" />
+                        <ListView opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                   <ProgressBar layoutX="44.0" layoutY="346.0" prefHeight="21.0" prefWidth="270.0" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="视频合并     ">
+    <Tab id="tab" fx:id="tab2" text="视频合并     ">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -98,17 +98,17 @@
                   </SplitMenuButton>
                   <StackPane layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <MediaView fitHeight="200.0" fitWidth="200.0" />
+                        <ListView opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
-                  <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="Output" />
-                  <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="Input" />
+                  <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                  <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
                   <ProgressBar layoutX="44.0" layoutY="345.0" prefHeight="22.0" prefWidth="270.0" />
                </children>
             </AnchorPane>
          </content>
     </Tab>
-      <Tab text="画面音轨分并    ">
+      <Tab id="tab" fx:id="tab3" text="画面音轨分并    ">
          <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -117,19 +117,27 @@
                         <Image url="@../Kiki%205.png" />
                      </image>
                   </ImageView>
-                  <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;" />
                   <StackPane layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <MediaView fitHeight="200.0" fitWidth="200.0" />
+                        <ListView opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
+                  <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="97.0" layoutX="222.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="45.0" layoutY="325.0" prefHeight="83.0" prefWidth="262.0">
+                     <children>
+                        <ToggleButton layoutX="160.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="32.0" prefWidth="102.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                        <ToggleButton layoutY="27.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick" prefHeight="30.0" prefWidth="105.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
+                     </children>
+                  </Pane>
                   <StackPane layoutX="341.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <MediaView fitHeight="200.0" fitWidth="200.0" />
+                        <ListView opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
-                  <ToggleButton layoutX="217.0" layoutY="361.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="102.0" text="Output" />
-                  <ToggleButton layoutX="45.0" layoutY="361.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" text="Input" />
                   <ProgressBar layoutX="341.0" layoutY="365.0" prefHeight="22.0" prefWidth="270.0" />
                </children></AnchorPane>
          </content>

@@ -12,8 +12,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ToolUI.fxml"));
+			Parent root = FXMLLoader.load(Main.class.getResource("ToolUI.fxml"));
 			Scene scene = new Scene(root,640,480);
+			primaryStage.setTitle("VideoToolBox");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
