@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
@@ -15,12 +16,13 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-border-color: #FFB6C1; -fx-border-width: 5px;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller">
   <tabs>
     <Tab id="tab" fx:id="tab1" text="视频转码     ">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="500.0">
                <children>
                   <ImageView fitHeight="457.0" fitWidth="804.0" layoutX="-11.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,11 +76,92 @@
                   <ProgressBar layoutX="44.0" layoutY="346.0" prefHeight="21.0" prefWidth="270.0" />
                   <StackPane fx:id="stack1" layoutX="45.0" layoutY="65.0" prefHeight="248.0" prefWidth="261.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="videolist1" editable="true" fixedCellSize="25.0" opacity="0.63" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="videolist1" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered" onMouseExited="#OnMouseExited" opacity="0.63" prefHeight="200.0" prefWidth="200.0" />
+                        <Label fx:id="label" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label1" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="25.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label2" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="50.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label3" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="75.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label4" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="100.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label5" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="125.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label6" alignment="TOP_CENTER" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="150.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label7" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="175.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label8" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="200.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="label9" onMouseClicked="#OMClabel" text="×" textFill="#e40000" visible="false" StackPane.alignment="TOP_RIGHT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets right="5.0" top="225.0" />
+                           </StackPane.margin>
+                        </Label>
                      </children>
                   </StackPane>
-               </children></AnchorPane>
-      </content>
+               </children>
+            </AnchorPane>
+         </content>
     </Tab>
     <Tab id="tab" fx:id="tab2" text="视频合并     ">
          <content>
@@ -101,7 +184,7 @@
                   <ProgressBar layoutX="44.0" layoutY="345.0" prefHeight="22.0" prefWidth="270.0" />
                   <StackPane fx:id="stack2" layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="videolist2" editable="true" fixedCellSize="25.0" opacity="0.61" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="videolist2" editable="true" fixedCellSize="25.0" onDragEntered="#OnMouseEntered" onDragExited="#OnMouseExited" onMouseEntered="#OnMouseEntered" onMouseExited="#OnMouseExited" opacity="0.61" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children>
@@ -131,12 +214,12 @@
                   <ProgressBar layoutX="341.0" layoutY="365.0" prefHeight="22.0" prefWidth="270.0" />
                   <StackPane fx:id="stack3" layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="videolist3" editable="true" fixedCellSize="25.0" opacity="0.59" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="videolist3" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered" onMouseExited="#OnMouseExited" opacity="0.59" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                   <StackPane fx:id="stack4" layoutX="341.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="musiclist" editable="true" fixedCellSize="25.0" opacity="0.55" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="musiclist" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered" onMouseExited="#OnMouseExited" opacity="0.55" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children></AnchorPane>
