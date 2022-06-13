@@ -14,7 +14,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-border-color: #FFB6C1; -fx-border-width: 5px;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller">
@@ -28,8 +27,57 @@
                         <Image url="@../Kiki%203.png" />
                      </image>
                   </ImageView>
-                  <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;" />
                   <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#Outputevent1" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                  <StackPane alignment="TOP_CENTER" layoutX="307.0" layoutY="65.0" prefHeight="250.0" prefWidth="17.0">
+                     <children>
+                        <Hyperlink fx:id="hyperlink0" onAction="#deletelabel1" text="×" textFill="RED" visible="false" />
+                        <Hyperlink fx:id="hyperlink1" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="25.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink2" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="50.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink3" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="75.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink4" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="100.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink5" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="125.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink6" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="150.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink7" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="175.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink8" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="200.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink9" onAction="#deletelabel1" text="×" textFill="RED" visible="false">
+                           <StackPane.margin>
+                              <Insets top="225.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                     </children>
+                  </StackPane>
                   <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick1" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
                   <FlowPane layoutX="383.0" layoutY="53.0" prefHeight="290.0" prefWidth="182.0">
                      <children>
@@ -75,56 +123,7 @@
                   <ProgressBar layoutX="44.0" layoutY="346.0" prefHeight="21.0" prefWidth="270.0" />
                   <StackPane fx:id="stack1" layoutX="45.0" layoutY="65.0" prefHeight="248.0" prefWidth="261.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="videolist1" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered1" onMouseExited="#OnMouseExited" opacity="0.63" prefHeight="200.0" prefWidth="200.0" />
-                        <Hyperlink fx:id="hyperlink0" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink1" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="25.0" />
-                           </StackPane.margin></Hyperlink>
-                        <Hyperlink fx:id="hyperlink2" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="50.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink3" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="75.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink4" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="100.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink5" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="125.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink6" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="150.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink7" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="175.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink8" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="200.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink9" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="225.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
+                        <ListView fx:id="videolist1" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered1" opacity="0.63" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children>
@@ -140,7 +139,6 @@
                         <Image url="@../Kiki%204.png" />
                      </image>
                   </ImageView>
-                  <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;" />
                   <SplitMenuButton layoutX="383.0" layoutY="76.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="转场">
                     <items>
 						<MenuItem mnemonicParsing="false" text="无" />
@@ -166,61 +164,61 @@
                     </items>
                   </SplitMenuButton>
                   <ToggleButton layoutX="490.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#Outputevent2" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                  <StackPane layoutX="315.0" layoutY="65.0" prefHeight="253.0" prefWidth="26.0">
+                     <children>
+                        <Hyperlink fx:id="hyperlink10" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER" />
+                        <Hyperlink fx:id="hyperlink11" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="25.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink12" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="50.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink13" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="75.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink14" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="100.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink15" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="125.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink16" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="150.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink17" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="175.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink18" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="200.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                        <Hyperlink fx:id="hyperlink19" onAction="#deletelabel2" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="225.0" />
+                           </StackPane.margin>
+                        </Hyperlink>
+                     </children>
+                  </StackPane>
                   <ToggleButton layoutX="383.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick2" prefHeight="30.0" prefWidth="75.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
                   <ProgressBar layoutX="44.0" layoutY="345.0" prefHeight="22.0" prefWidth="270.0" />
                   <StackPane fx:id="stack2" layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
                      <children>
-                        <ListView fx:id="videolist2" editable="true" fixedCellSize="25.0" onDragEntered="#OnMouseEntered2" onDragExited="#OnMouseExited" onMouseEntered="#OnMouseEntered2" onMouseExited="#OnMouseExited" opacity="0.61" prefHeight="200.0" prefWidth="200.0" />
-                        <Hyperlink fx:id="hyperlink10" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink11" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="25.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink12" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="50.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink13" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="75.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink14" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="100.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink15" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="125.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink16" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="150.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink17" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="175.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink18" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="200.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
-                        <Hyperlink fx:id="hyperlink19" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="5.0" top="225.0" />
-                           </StackPane.margin>
-                        </Hyperlink>
+                        <ListView fx:id="videolist2" editable="true" fixedCellSize="25.0" onDragEntered="#OnMouseEntered2" onMouseEntered="#OnMouseEntered2" opacity="0.61" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children>
@@ -236,126 +234,125 @@
                         <Image url="@../Kiki%205.png" />
                      </image>
                   </ImageView>
-                  <Pane opacity="0.2" prefHeight="451.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF;">
+                  <ToggleButton layoutX="212.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#Outputevent3" prefHeight="32.0" prefWidth="102.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
+                  <StackPane layoutX="302.0" layoutY="60.0" prefHeight="253.0" prefWidth="26.0">
                      <children>
-                        <ImageView fitHeight="35.0" fitWidth="97.0" layoutX="222.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="45.0" layoutY="325.0" prefHeight="83.0" prefWidth="262.0">
-                     <children>
-                        <ToggleButton layoutX="160.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#Outputevent3" prefHeight="32.0" prefWidth="102.0" styleClass="button" stylesheets="@VideoTool.css" text="Output" />
-                        <ToggleButton layoutY="27.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick3" prefHeight="30.0" prefWidth="105.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
-                     </children>
-                  </Pane>
-                  <ProgressBar layoutX="341.0" layoutY="365.0" prefHeight="22.0" prefWidth="270.0" />
-                  <StackPane fx:id="stack3" layoutX="45.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
-                     <children>
-                        <ListView fx:id="videolist3" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered3" onMouseExited="#OnMouseExited" opacity="0.59" prefHeight="200.0" prefWidth="200.0" />
-                        <Hyperlink fx:id="hyperlink20" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink20" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink21" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink21" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="25.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink22" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink22" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="50.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink23" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink23" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="75.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink24" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink24" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="100.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink25" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink25" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="125.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink26" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink26" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="150.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink27" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink27" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="175.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink28" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink28" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="200.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink29" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink29" onAction="#deletelabel3" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="225.0" />
                            </StackPane.margin>
                         </Hyperlink>
                      </children>
                   </StackPane>
-                  <StackPane fx:id="stack4" layoutX="341.0" layoutY="65.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
+                  <StackPane layoutX="600.0" layoutY="65.0" prefHeight="244.0" prefWidth="23.0">
                      <children>
-                        <ListView fx:id="musiclist" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered4" onMouseExited="#OnMouseExited" opacity="0.55" prefHeight="200.0" prefWidth="200.0" />
-                        <Hyperlink fx:id="hyperlink30" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink30" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink31" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink31" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="25.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink32" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink32" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="50.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink33" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink33" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="75.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink34" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink34" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="100.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink35" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink35" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="125.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink36" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink36" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="150.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink37" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink37" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="175.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink38" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink38" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="200.0" />
                            </StackPane.margin>
                         </Hyperlink>
-                        <Hyperlink fx:id="hyperlink39" onAction="#deletelabel" text="×" textFill="RED" visible="false" StackPane.alignment="TOP_RIGHT">
+                        <Hyperlink fx:id="hyperlink39" onAction="#deletelabel4" text="×" textFill="RED" StackPane.alignment="TOP_RIGHT">
                            <StackPane.margin>
                               <Insets right="5.0" top="225.0" />
                            </StackPane.margin>
                         </Hyperlink>
+                     </children>
+                  </StackPane>
+                  <ToggleButton layoutX="45.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#OnMouseClick3" prefHeight="30.0" prefWidth="105.0" styleClass="button" stylesheets="@VideoTool.css" text="Input" />
+                  <ProgressBar layoutX="341.0" layoutY="365.0" prefHeight="22.0" prefWidth="270.0" />
+                  <StackPane fx:id="stack3" layoutX="37.0" layoutY="64.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
+                     <children>
+                        <ListView fx:id="videolist3" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered3" opacity="0.59" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="stack4" layoutX="328.0" layoutY="64.0" prefHeight="245.0" prefWidth="270.0" style="-fx-background-radius: 12px; -fx-border-width: 3px; -fx-border-color: #F0F8FF;">
+                     <children>
+                        <ListView fx:id="musiclist" editable="true" fixedCellSize="25.0" onMouseEntered="#OnMouseEntered4" opacity="0.55" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </StackPane>
                </children></AnchorPane>

@@ -211,6 +211,12 @@ public class controller {
 					map1.put(data.get(i),linklist[i]);
 				}
 				videolist1.setItems(data);
+				Set<String> set=map1.keySet();
+				Iterator<String> it=set.iterator();
+				while(it.hasNext()){
+					Hyperlink link = map1.get(it.next());
+					link.setVisible(true);
+				}
 			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -236,6 +242,12 @@ public class controller {
 					map2.put(data2.get(i),hyperlinklist[i]);
 				}
 				videolist2.setItems(data2);
+				Set<String> set=map2.keySet();
+				Iterator<String> it=set.iterator();
+				while(it.hasNext()){
+					Hyperlink link = map2.get(it.next());
+					link.setVisible(true);
+				}
 			} 	
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -278,7 +290,18 @@ public class controller {
 				if(music!=null) {
 					musiclist.setItems(music);
 				}
-				
+				Set<String> set=map3.keySet();
+				Iterator<String> it=set.iterator();
+				while(it.hasNext()){
+					Hyperlink link = map3.get(it.next());
+					link.setVisible(true);
+				}
+				Set<String> mset=map4.keySet();
+				Iterator<String> mit=mset.iterator();
+				while(mit.hasNext()){
+					Hyperlink link = map4.get(mit.next());
+					link.setVisible(true);
+				}
 			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -328,28 +351,47 @@ public class controller {
 			alert.show();
 		}  	
     }
-        
+    
     @FXML
-    void deletelabel(ActionEvent event) {
+    void deletelabel1(ActionEvent event) {
     	Hyperlink source = (Hyperlink) event.getSource();
     	Integer id = Integer.parseInt(source.getId().split("hyperlink")[1]);
     	videolist1.getItems().remove(id.intValue());
     	Hyperlink[] hyperlinklist = {hyperlink0,hyperlink1,hyperlink2,hyperlink3,hyperlink4,hyperlink5,hyperlink6,hyperlink7,hyperlink8,hyperlink9};    	
     	hyperlinklist[videolist1.getItems().size()].setVisible(false);
-    	System.out.print("1");
     }
     
+    @FXML
+    void deletelabel2(ActionEvent event) {
+    	Hyperlink source = (Hyperlink) event.getSource();
+    	Integer id = Integer.parseInt(source.getId().split("hyperlink")[1]);
+    	videolist2.getItems().remove(id.intValue()- 10);
+    	Hyperlink[] hyperlinklist = {hyperlink10,hyperlink11,hyperlink12,hyperlink13,hyperlink14,hyperlink15,hyperlink16,hyperlink17,hyperlink18,hyperlink19};    	
+    	hyperlinklist[videolist2.getItems().size()].setVisible(false);
+    }
+    
+    @FXML
+    void deletelabel3(ActionEvent event) {
+    	Hyperlink source = (Hyperlink) event.getSource();
+    	Integer id = Integer.parseInt(source.getId().split("hyperlink")[1]);
+    	videolist3.getItems().remove(id.intValue()-20);
+    	Hyperlink[] hyperlinklist = {hyperlink20,hyperlink21,hyperlink22,hyperlink23,hyperlink24,hyperlink25,hyperlink26,hyperlink27,hyperlink28,hyperlink29};    	
+    	hyperlinklist[videolist3.getItems().size()].setVisible(false);
+    }
+    
+    @FXML
+    void deletelabel4(ActionEvent event) {
+    	Hyperlink source = (Hyperlink) event.getSource();
+    	Integer id = Integer.parseInt(source.getId().split("hyperlink")[1]);
+    	musiclist.getItems().remove(id.intValue()-30);
+    	Hyperlink[] hyperlinklist = {hyperlink30,hyperlink31,hyperlink32,hyperlink33,hyperlink34,hyperlink35,hyperlink36,hyperlink37,hyperlink38,hyperlink39};    	
+    	hyperlinklist[musiclist.getItems().size()].setVisible(false);
+    }
     @FXML
     void OnMouseEntered1(MouseEvent event) {
     	videolist1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	videolist1.setEditable(true);
-		videolist1.setCellFactory(TextFieldListCell.forListView());	
-		Set<String> set=map1.keySet();
-		Iterator<String> it=set.iterator();
-		while(it.hasNext()){
-			Hyperlink link = map1.get(it.next());
-			link.setVisible(true);
-		}
+		videolist1.setCellFactory(TextFieldListCell.forListView());
     }
     
     @FXML
@@ -357,12 +399,6 @@ public class controller {
     	videolist2.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	videolist2.setEditable(true);
 		videolist2.setCellFactory(TextFieldListCell.forListView());	
-		Set<String> set=map2.keySet();
-		Iterator<String> it=set.iterator();
-		while(it.hasNext()){
-			Hyperlink link = map2.get(it.next());
-			link.setVisible(true);
-		}
     }
 
     @FXML
@@ -370,12 +406,6 @@ public class controller {
     	videolist3.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	videolist3.setEditable(true);
 		videolist3.setCellFactory(TextFieldListCell.forListView());	
-		Set<String> set=map3.keySet();
-		Iterator<String> it=set.iterator();
-		while(it.hasNext()){
-			Hyperlink link = map3.get(it.next());
-			link.setVisible(true);
-		}
     }
     
     @FXML
@@ -383,45 +413,6 @@ public class controller {
     	musiclist.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	musiclist.setEditable(true);
     	musiclist.setCellFactory(TextFieldListCell.forListView());	
-		Set<String> set=map4.keySet();
-		Iterator<String> it=set.iterator();
-		while(it.hasNext()){
-			Hyperlink link = map4.get(it.next());
-			link.setVisible(true);
-		}
     }
- 
-    
-    @FXML
-    void OnMouseExited(MouseEvent event) {
-    	Set<String> set1=map1.keySet();
-		Iterator<String> it1=set1.iterator();
-		while(it1.hasNext()){
-			Hyperlink link1 = map1.get(it1.next());
-			link1.setVisible(false);
-		}
-		
-		Set<String> set2=map2.keySet();
-		Iterator<String> it2=set2.iterator();
-		while(it2.hasNext()){
-			Hyperlink link2 = map2.get(it2.next());
-			link2.setVisible(false);
-		}
-		
-		Set<String> set3=map3.keySet();
-		Iterator<String> it3=set3.iterator();
-		while(it3.hasNext()){
-			Hyperlink link3 = map3.get(it3.next());
-			link3.setVisible(false);
-		}
-		
-		Set<String> set4=map4.keySet();
-		Iterator<String> it4=set4.iterator();
-		while(it4.hasNext()){
-			Hyperlink link4 = map4.get(it4.next());
-			link4.setVisible(false);
-		}
-    }
-
 }
 
