@@ -108,7 +108,7 @@ public class FFBridge {
                     && outputHeight == null && outputBitRate == null)
                 cmdArray.add("copy");
             else
-                cmdArray.add(outputCodec == null ? probeResult.get("codec_type") : outputCodec);
+                cmdArray.add(outputCodec == null ? (String) probeResult.get("codec_type") : outputCodec);
             if (outputBitRate != null && outputBitRate < (Integer) probeResult.get("bit_rate")) {
                 cmdArray.add("-b:v");
                 cmdArray.add(String.format("%dk", outputBitRate));
