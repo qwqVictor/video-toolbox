@@ -2,7 +2,9 @@ package application;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,6 +18,11 @@ public class FFBridge {
     Runtime runtime;
     String FFmpegPath;
     String FFprobePath;
+
+    public static String getFileNameWithExtension(String filePath) {
+        String[] tokens = Paths.get(filePath).getFileName().toString().split("\\.");
+        return String.join(".", tokens);
+    }
 
     public static String getFileNameWithoutExtension(String filePath) {
         String[] tokens = Paths.get(filePath).getFileName().toString().split("\\.");
@@ -63,13 +70,13 @@ public class FFBridge {
         pBuilder.command(cmdArray);
         try {
             Process p = pBuilder.start();
-            BufferedReader reader = p.inputReader();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
             do {
                 line = reader.readLine();
             } while (line == null && (p.isAlive() || p.exitValue() == 0));
             if (!p.isAlive() && p.exitValue() != 0) {
-                throw new FFRuntimeException(p.errorReader());
+                throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
             }
             String[] tokens = line.split(",");
             ret.put("codec_type", tokens[0]);
@@ -116,14 +123,14 @@ public class FFBridge {
             pBuilder.command(cmdArray);
             try {
                 Process p = pBuilder.start();
-                BufferedReader stdoutReader = p.inputReader();
+                BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line = null;
                 while ((line = stdoutReader.readLine()) != null) {
                     System.out.println("Stdout: " + line);
                 }
                 p.waitFor();
                 if (!p.isAlive() && p.exitValue() != 0) {
-                    throw new FFRuntimeException(p.errorReader());
+                    throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
                 }
             } catch (IOException | InterruptedException e) {
                 throw new FFRuntimeException(e.getMessage());
