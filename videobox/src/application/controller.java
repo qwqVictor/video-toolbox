@@ -1,6 +1,5 @@
 package application;
 
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -330,32 +329,31 @@ public class controller {
 
     @FXML
     void Outputevent1(MouseEvent event) {
-    	//try {
+    	try {
 			Stage primaryStage = new Stage();
 			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
 			File dir = file.showDialog(primaryStage);
-			System.out.print(Width.getText());
 			if (dir != null) {
 				Integer width = Width.getText().length() == 0 ? null : Integer.parseInt(Width.getText());
 				Integer height = Height.getText().length() == 0 ? null : Integer.parseInt(Height.getText());
 				Integer bitrate = Rate.getText().length() == 0 ? null : Integer.parseInt(Rate.getText());
 				Bridge.transform(data, dir.toString(), this.tab1OutputFormat, this.tab1Outputcodec, width, height, bitrate);
 			}
-//		}catch(Exception e){	
-//			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//			alert.setContentText("The video tool box is error");
-//			alert.show();
-//		}  	
+		}catch(Exception e){	
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setContentText("The video tool box is error");
+			alert.show();
+		}  	
     }
     
     @FXML
     void Outputevent2(MouseEvent event) {
     	try {
-			Stage primaryStage = new Stage();
+    		Stage primaryStage = new Stage();
 			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
-			file.showDialog(primaryStage);
+			File dir = file.showDialog(primaryStage);
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("The video tool box is error");
@@ -366,10 +364,10 @@ public class controller {
     @FXML
     void Outputevent3(MouseEvent event) {
     	try {
-			Stage primaryStage = new Stage();
-			FileChooser file = new FileChooser();
+    		Stage primaryStage = new Stage();
+			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
-			file.showSaveDialog(primaryStage);
+			File dir = file.showDialog(primaryStage);
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("The video tool box is error");
@@ -468,7 +466,31 @@ public class controller {
 
     @FXML
     void SelectTransition(ActionEvent event) {
-    	
+    	Map<String, String> transitions = ImmutableMap.of(
+    			"无", null,
+    			"渐隐", "fade",
+    			"向左擦除", "wipeleft",
+    			"向右擦除", "wiperight",
+    			"向上擦除", "wipeup",
+    			"向下擦除", "wipedown",
+    			"左滑", "slideleft",
+    			"右滑", "slideright",
+    			"上滑", "slideup",
+    			"下滑", "slidedown",
+    			"圆形切割", "circlecrop",
+    			"方形切割", "rectcrop",
+    			"距离", "distance",
+    			"黑色渐变", "fadeblack",
+    			"白色渐变", "fadewhite",
+    			"镭射", "radial",
+    			"圆形打开", "circleopen",
+    			"圆形关闭", "circleclose",
+    			"溶解", "dissolve",
+    			"像素化", "pixelize"
+    			);
+    	MenuItem item = (MenuItem) event.getSource();
+    	FormatButton.setText(item.getText());
+    	this.tab1OutputTran = transitions.get(item.getText());
     }
 
 
