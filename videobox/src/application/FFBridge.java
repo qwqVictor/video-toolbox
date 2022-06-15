@@ -166,8 +166,10 @@ public class FFBridge {
             if (!(probeResult.get("width").equals(lastWidth)) || !(probeResult.get("height").equals(lastHeight))) {
                 throw new FFRuntimeException("Width and height must be same");
             }
-            cmdArray.add("-i");
-            cmdArray.add(file);
+            if (transition != null) {
+                cmdArray.add("-i");
+                cmdArray.add(file);
+            }
         }
         if (transition != null) {
             final int transitionDuration = 1;
@@ -192,6 +194,27 @@ public class FFBridge {
             cmdArray.add("[audio]");
             cmdArray.add("-movflags");
             cmdArray.add("+faststart");
+        } else {
+            File filelist = null;
+            try {
+                filelist = File.createTempFile("cqupt3g-", ".txt");
+                filelist.deleteOnExit();
+                FileWriter writer = new FileWriter(filelist);
+                for (String file : inputFiles) {
+                    writer.write(String.format("file '%s'\n", file.replaceAll("'", "\\'")));
+                }
+                writer.close();
+            } catch (IOException e) {
+                throw new FFRuntimeException("Unable to create temp file: " + e.getMessage());
+            }
+            cmdArray.add("-f");
+            cmdArray.add("concat");
+            cmdArray.add("-safe");
+            cmdArray.add("0");
+            cmdArray.add("-i");
+            cmdArray.add(filelist.getAbsolutePath());
+            cmdArray.add("-codec");
+            cmdArray.add("copy");
         }
 
         cmdArray.add(outputFile);
@@ -221,7 +244,7 @@ public class FFBridge {
             inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\1.mp4");
             inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\2.mp4");
             inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\3.mp4");
-            bridge.cat(inputFiles, "C:\\Users\\Victor\\Downloads\\testff\\merged.mp4", "dissolve");
+            bridge.cat(inputFiles, "C:\\Users\\Victor\\Downloads\\testff\\merged.mp4", null);
             // bridge.transform(inputFiles, "C:\\Users\\Victor\\Downloads", "flv", "h264",
             // 1920, 1080, 5000);
         } catch (FFRuntimeException e) {
