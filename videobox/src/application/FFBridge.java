@@ -315,6 +315,53 @@ public class FFBridge {
         }
     }
 
+    public void joinVideoAudio(List<String> videoInputFiles, List<String> audioInputFiles, String outputPath)
+            throws FFRuntimeException {
+        if (videoInputFiles.size() != audioInputFiles.size()) {
+            throw new FFRuntimeException("Video files and audio files mismatch!");
+        }
+        int length = videoInputFiles.size();
+        for (int i = 0; i < length; i++) {
+            ProcessBuilder pBuilder = new ProcessBuilder();
+            List<String> cmdArray = new ArrayList<String>();
+            String videoFile = videoInputFiles.get(i), audioFile = audioInputFiles.get(i);
+            Map<String, Object> videoProbeResult = probe(videoFile), audioProbeResult = probe(audioFile);
+            cmdArray.add(FFmpegPath);
+            cmdArray.add("-y");
+            cmdArray.add("-nostdin");
+            cmdArray.add("-i");
+            cmdArray.add(videoFile);
+            cmdArray.add("-i");
+            cmdArray.add(audioFile);
+            cmdArray.add("-vcodec");
+            cmdArray.add("copy");
+            if (((String) audioProbeResult.get("codec_type")).equals("aac")) {
+                cmdArray.add("-acodec");
+                cmdArray.add("copy");
+            }
+
+            cmdArray.add(getOutputFilePath(outputPath, getFileNameWithoutExtension(videoFile) + "_joined",
+                    getFileExtension(videoFile)));
+            System.out.println(String.join(" ", cmdArray));
+            pBuilder.redirectErrorStream(true);
+            pBuilder.command(cmdArray);
+            try {
+                Process p = pBuilder.start();
+                BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String line = null;
+                while ((line = stdoutReader.readLine()) != null) {
+                    System.out.println("Stdout: " + line);
+                }
+                p.waitFor();
+                if (!p.isAlive() && p.exitValue() != 0) {
+                    throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+                }
+            } catch (IOException | InterruptedException e) {
+                throw new FFRuntimeException(e.getMessage());
+            }
+        }
+    }
+
     public static void main(String args[]) {
         try {
             FFBridge bridge = new FFBridge();
