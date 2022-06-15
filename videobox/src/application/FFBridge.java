@@ -361,23 +361,4 @@ public class FFBridge {
             }
         }
     }
-
-    public static void main(String args[]) {
-        try {
-            FFBridge bridge = new FFBridge();
-            List<String> inputFiles = new ArrayList<String>();
-            inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\1.mp4");
-            /*
-             * inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\2.mp4");
-             * inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\3.mp4");
-             * bridge.cat(inputFiles, "C:\\Users\\Victor\\Downloads\\testff\\merged.mp4",
-             * null);
-             */
-            // bridge.transform(inputFiles, "C:\\Users\\Victor\\Downloads", "flv", "h264",
-            // 1920, 1080, 5000);
-            bridge.splitAudio(inputFiles, "C:\\Users\\Victor\\Downloads\\testff");
-        } catch (FFRuntimeException e) {
-            System.err.println(e.getMessage());
-        }
-    }
 }
