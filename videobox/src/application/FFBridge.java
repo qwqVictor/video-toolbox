@@ -169,21 +169,31 @@ public class FFBridge {
             cmdArray.add("-i");
             cmdArray.add(file);
         }
-        final int transitionDuration = 1;
-        float videoLastOffset = 0;
-        for (int i = 1; i < inputFiles.size(); i++) {
-            videoLastOffset += ((Float) probeResults.get(i - 1).get("duration")).floatValue();
-            videoFilter[i - 1] = String.format("[%s][%d:v]xfade=transition=%s:duration=%d:offset=%f%s",
-                    i == 1 ? "0" : String.format("vfade%d", i - 1), i, transition, transitionDuration,
-                    videoLastOffset, i == inputFiles.size() - 1 ? ",format=yuv420p" : String.format("[vfade%d]", i));
+        if (transition != null) {
+            final int transitionDuration = 1;
+            float videoLastOffset = 0;
+            for (int i = 1; i < inputFiles.size(); i++) {
+                videoLastOffset += ((Float) probeResults.get(i - 1).get("duration")).floatValue() - transitionDuration;
+                videoFilter[i - 1] = String.format("[%s][%d]xfade=transition=%s:duration=%d:offset=%f%s",
+                        i == 1 ? "0" : String.format("vfade%d", i - 1), i, transition, transitionDuration,
+                        videoLastOffset,
+                        i == inputFiles.size() - 1 ? ",format=yuv420p[video]" : String.format("[vfade%d]", i));
+            }
+            for (int i = 1; i < inputFiles.size(); i++) {
+                audioFilter[i - 1] = String.format("[%s][%d:a]acrossfade=d=%d%s",
+                        i == 1 ? "0:a" : String.format("afade%d", i - 1), i, transitionDuration,
+                        i == inputFiles.size() - 1 ? "[audio]" : String.format("[afade%d]", i));
+            }
+            cmdArray.add("-filter_complex");
+            cmdArray.add(String.join(";", videoFilter) + ";" + String.join(";", audioFilter));
+            cmdArray.add("-map");
+            cmdArray.add("[video]");
+            cmdArray.add("-map");
+            cmdArray.add("[audio]");
+            cmdArray.add("-movflags");
+            cmdArray.add("+faststart");
         }
-        for (int i = 1; i < inputFiles.size(); i++) {
-            audioFilter[i - 1] = String.format("[%s][%d:a]acrossfade=d=%d%s",
-                    i == 1 ? "0:a" : String.format("afade%d", i - 1), i, transitionDuration,
-                    i == inputFiles.size() - 1 ? "" : String.format("[afade%d]", i));
-        }
-        cmdArray.add("-filter_complex");
-        cmdArray.add(String.join(";", videoFilter) + ";" + String.join(";", audioFilter));
+
         cmdArray.add(outputFile);
         System.out.println(String.join(" ", cmdArray));
         pBuilder.redirectErrorStream(true);
