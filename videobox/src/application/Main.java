@@ -1,18 +1,13 @@
 package application;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 
 
 public class Main extends Application {
-	  public static final ObservableList data = 
-		        FXCollections.observableArrayList();
 	@Override
 	public void start(Stage primaryStage) {
 		try {

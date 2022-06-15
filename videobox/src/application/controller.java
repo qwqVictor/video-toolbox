@@ -1,27 +1,26 @@
 package application;
 
-import java.io.BufferedReader;
+
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
@@ -36,8 +35,27 @@ public class controller {
 	Map <String,Hyperlink> map2=new HashMap<>();
 	Map <String,Hyperlink> map3=new HashMap<>();
 	Map <String,Hyperlink> map4=new HashMap<>();
-	
+	FFBridge Bridge = new FFBridge();
+	String tab1OutputFormat = null;
+	String tab1Outputcodec = null;
+	String tab1OutputTran = null;
 
+	
+    @FXML
+    private SplitMenuButton CodecButton;
+
+    @FXML
+    private SplitMenuButton FormatButton;
+    
+	@FXML
+	private TextField Height;
+
+	@FXML
+	private TextField Rate;
+
+    @FXML
+	private TextField Width;
+	    
 	@FXML
     private ListView<String> musiclist;
 	
@@ -312,25 +330,32 @@ public class controller {
 
     @FXML
     void Outputevent1(MouseEvent event) {
-    	try {
+    	//try {
 			Stage primaryStage = new Stage();
-			FileChooser file = new FileChooser();
+			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
-			file.showSaveDialog(primaryStage);
-		}catch(Exception e){	
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
-			alert.show();
-		}  	
+			File dir = file.showDialog(primaryStage);
+			System.out.print(Width.getText());
+			if (dir != null) {
+				Integer width = Width.getText().length() == 0 ? null : Integer.parseInt(Width.getText());
+				Integer height = Height.getText().length() == 0 ? null : Integer.parseInt(Height.getText());
+				Integer bitrate = Rate.getText().length() == 0 ? null : Integer.parseInt(Rate.getText());
+				Bridge.transform(data, dir.toString(), this.tab1OutputFormat, this.tab1Outputcodec, width, height, bitrate);
+			}
+//		}catch(Exception e){	
+//			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//			alert.setContentText("The video tool box is error");
+//			alert.show();
+//		}  	
     }
     
     @FXML
     void Outputevent2(MouseEvent event) {
     	try {
 			Stage primaryStage = new Stage();
-			FileChooser file = new FileChooser();
+			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
-			file.showSaveDialog(primaryStage);
+			file.showDialog(primaryStage);
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("The video tool box is error");
@@ -387,6 +412,7 @@ public class controller {
     	Hyperlink[] hyperlinklist = {hyperlink30,hyperlink31,hyperlink32,hyperlink33,hyperlink34,hyperlink35,hyperlink36,hyperlink37,hyperlink38,hyperlink39};    	
     	hyperlinklist[musiclist.getItems().size()].setVisible(false);
     }
+    
     @FXML
     void OnMouseEntered1(MouseEvent event) {
     	videolist1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -414,5 +440,39 @@ public class controller {
     	musiclist.setEditable(true);
     	musiclist.setCellFactory(TextFieldListCell.forListView());	
     }
+    
+
+    @FXML
+    void SelectCodec(ActionEvent event) {
+    	Map<String, String> codecs = new HashMap<String, String>();
+    	codecs.put("×Ô¶¯", null);
+    	codecs.put("H.264", "h264");
+    	codecs.put("H.265", "hevc");
+    	MenuItem item = (MenuItem) event.getSource();
+    	CodecButton.setText(item.getText());
+    	this.tab1Outputcodec = codecs.get(item.getText());
+    }
+
+    @FXML
+    void SelectFormat(ActionEvent event) {
+    	Map<String, String> videoFormats = new HashMap<String, String>();
+    	videoFormats.put("MPEG-4", "mp4");
+    	videoFormats.put("QuickTime MOV", "mov");
+    	videoFormats.put("FLV", "flv");
+    	videoFormats.put("MKV", "mkv");
+    	videoFormats.put("TS", "ts");
+    	MenuItem item = (MenuItem) event.getSource();
+    	FormatButton.setText(item.getText());
+    	this.tab1OutputFormat = videoFormats.get(item.getText());
+    }
+
+    @FXML
+    void SelectTransition(ActionEvent event) {
+    	
+    }
+
+
+
+    
 }
 
