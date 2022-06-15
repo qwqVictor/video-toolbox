@@ -237,16 +237,98 @@ public class FFBridge {
         }
     }
 
+    private void getVideoOnly(String file, String output) {
+        ProcessBuilder pBuilder = new ProcessBuilder();
+        List<String> cmdArray = new ArrayList<String>();
+        cmdArray.add(FFmpegPath);
+        cmdArray.add("-y");
+        cmdArray.add("-nostdin");
+        cmdArray.add("-i");
+        cmdArray.add(file);
+        cmdArray.add("-vcodec");
+        cmdArray.add("copy");
+        cmdArray.add("-an");
+        cmdArray.add(output);
+        System.out.println(String.join(" ", cmdArray));
+        pBuilder.redirectErrorStream(true);
+        pBuilder.command(cmdArray);
+        try {
+            Process p = pBuilder.start();
+            BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = null;
+            while ((line = stdoutReader.readLine()) != null) {
+                System.out.println("Stdout: " + line);
+            }
+            p.waitFor();
+            if (!p.isAlive() && p.exitValue() != 0) {
+                throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new FFRuntimeException(e.getMessage());
+        }
+    }
+
+    private void getAudioOnly(String file, String output, boolean copy) {
+        ProcessBuilder pBuilder = new ProcessBuilder();
+        List<String> cmdArray = new ArrayList<String>();
+        cmdArray.add(FFmpegPath);
+        cmdArray.add("-y");
+        cmdArray.add("-nostdin");
+        cmdArray.add("-i");
+        cmdArray.add(file);
+        cmdArray.add("-vn");
+        if (copy) {
+            cmdArray.add("-acodec");
+            cmdArray.add("copy");
+        }
+        cmdArray.add(output);
+        System.out.println(String.join(" ", cmdArray));
+        pBuilder.redirectErrorStream(true);
+        pBuilder.command(cmdArray);
+        try {
+            Process p = pBuilder.start();
+            BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = null;
+            while ((line = stdoutReader.readLine()) != null) {
+                System.out.println("Stdout: " + line);
+            }
+            p.waitFor();
+            if (!p.isAlive() && p.exitValue() != 0) {
+                throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new FFRuntimeException(e.getMessage());
+        }
+    }
+
+    public void splitAudio(List<String> inputFiles, String outputPath) throws FFRuntimeException {
+        for (String file : inputFiles) {
+            String ext = getFileExtension(file);
+            getVideoOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file) + "_videoOnly", ext));
+            String audioExt = "m4a";
+            boolean audioCopy = true;
+            if (ext.equals("wmv") || ext.equals("ogv")) {
+                audioExt = "mp3";
+                audioCopy = false;
+            }
+            getAudioOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file), audioExt), audioCopy);
+        }
+    }
+
     public static void main(String args[]) {
         try {
             FFBridge bridge = new FFBridge();
             List<String> inputFiles = new ArrayList<String>();
             inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\1.mp4");
-            inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\2.mp4");
-            inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\3.mp4");
-            bridge.cat(inputFiles, "C:\\Users\\Victor\\Downloads\\testff\\merged.mp4", null);
+            /*
+             * inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\2.mp4");
+             * inputFiles.add("C:\\Users\\Victor\\Downloads\\testff\\3.mp4");
+             * bridge.cat(inputFiles, "C:\\Users\\Victor\\Downloads\\testff\\merged.mp4",
+             * null);
+             */
             // bridge.transform(inputFiles, "C:\\Users\\Victor\\Downloads", "flv", "h264",
             // 1920, 1080, 5000);
+            bridge.splitAudio(inputFiles, "C:\\Users\\Victor\\Downloads\\testff");
         } catch (FFRuntimeException e) {
             System.err.println(e.getMessage());
         }
