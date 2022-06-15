@@ -86,10 +86,16 @@ public class FFBridge {
             String[] tokens = line.split(",");
             ret.put("codec_type", tokens[0]);
             ret.put("codec_name", tokens[1]);
-            ret.put("width", Integer.parseInt(tokens[2]));
-            ret.put("height", Integer.parseInt(tokens[3]));
-            ret.put("duration", Float.parseFloat(tokens[4]));
-            ret.put("bit_rate", Integer.parseInt(tokens[5]) / 1000);
+            if (tokens.length == 6) {
+                ret.put("width", Integer.parseInt(tokens[2]));
+                ret.put("height", Integer.parseInt(tokens[3]));
+                ret.put("duration", Float.parseFloat(tokens[4]));
+                ret.put("bit_rate", Integer.parseInt(tokens[5]) / 1000);
+            } else {
+                ret.put("duration", Float.parseFloat(tokens[2]));
+                ret.put("bit_rate", Integer.parseInt(tokens[3]) / 1000);
+            }
+
             return ret;
         } catch (IOException e) {
             throw new FFRuntimeException(e.getMessage());
