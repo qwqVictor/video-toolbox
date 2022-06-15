@@ -139,7 +139,7 @@
                         <Image url="@../Kiki%204.png" />
                      </image>
                   </ImageView>
-                  <SplitMenuButton layoutX="383.0" layoutY="76.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="转场">
+                  <SplitMenuButton fx:id="CatButton" layoutX="383.0" layoutY="76.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="转场">
                     <items>
 						<MenuItem mnemonicParsing="false" onAction="#SelectTransition" text="无" />
 						<MenuItem mnemonicParsing="false" onAction="#SelectTransition" text="渐隐" />

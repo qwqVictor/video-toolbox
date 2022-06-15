@@ -39,8 +39,10 @@ public class controller {
 	String tab1Outputcodec = null;
 	String tab1OutputTran = null;
 
+	@FXML
+	private SplitMenuButton CatButton;
 	
-    @FXML
+	@FXML
     private SplitMenuButton CodecButton;
 
     @FXML
@@ -237,7 +239,7 @@ public class controller {
 			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  		
     }
@@ -268,7 +270,7 @@ public class controller {
 			} 	
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  	
     }
@@ -285,7 +287,10 @@ public class controller {
 			if(list!=null) {				
 				for (int i = 0; i < list.size(); i++) {
 					String[] strs = list.get(i).toString().split("\\.");
-					if(strs[strs.length-1].equals("mp3")) {
+					if(strs[strs.length-1].toLowerCase().equals("mp3") 
+						|| strs[strs.length-1].toLowerCase().equals("m4a")
+						|| strs[strs.length-1].toLowerCase().equals("ogg")
+						|| strs[strs.length-1].toLowerCase().equals("flac")) {
 						if (!music.contains(list.get(i).toString()))
 							music.add(list.get(i).toString());				
 					}else {
@@ -322,7 +327,7 @@ public class controller {
 			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  	  	
     }
@@ -339,10 +344,13 @@ public class controller {
 				Integer height = Height.getText().length() == 0 ? null : Integer.parseInt(Height.getText());
 				Integer bitrate = Rate.getText().length() == 0 ? null : Integer.parseInt(Rate.getText());
 				Bridge.transform(data, dir.toString(), this.tab1OutputFormat, this.tab1Outputcodec, width, height, bitrate);
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setContentText("视频转换完成，输出路径为:"+dir.getAbsolutePath());
+				alert.show();
 			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  	
     }
@@ -351,12 +359,18 @@ public class controller {
     void Outputevent2(MouseEvent event) {
     	try {
     		Stage primaryStage = new Stage();
-			DirectoryChooser file = new DirectoryChooser();
+    		FileChooser file = new FileChooser();
 			file.setTitle("Save File");
-			File dir = file.showDialog(primaryStage);
+			File filename = file.showSaveDialog(primaryStage);
+			if(filename != null) {
+				Bridge.cat(data2, filename.getAbsolutePath(), tab1OutputTran);
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setContentText("视频合并完成，输出路径为:"+filename.getAbsolutePath());
+				alert.show();
+			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  	
     }
@@ -368,9 +382,23 @@ public class controller {
 			DirectoryChooser file = new DirectoryChooser();
 			file.setTitle("Save File");
 			File dir = file.showDialog(primaryStage);
+			if(dir !=null ) {
+				if (music == null || (music != null && music.size() == 0)) {
+					Bridge.splitAudio(video3, dir.getAbsolutePath());
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setContentText("视频音轨分离完成，输出路径为:"+dir.getAbsolutePath() + "，无音频的视频文件以_videoOnly结尾，音频为原来视频的名字");
+					alert.show();
+				}
+				else {
+					Bridge.joinVideoAudio(video3, music, dir.getAbsolutePath());
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setContentText("视频音轨合并完成，输出路径为:"+dir.getAbsolutePath() + "合并的视频文件以_merged结尾");
+					alert.show();
+				}
+			}
 		}catch(Exception e){	
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setContentText("The video tool box is error");
+			alert.setContentText(e.getMessage());
 			alert.show();
 		}  	
     }
@@ -466,30 +494,29 @@ public class controller {
 
     @FXML
     void SelectTransition(ActionEvent event) {
-    	Map<String, String> transitions = ImmutableMap.of(
-    			"无", null,
-    			"渐隐", "fade",
-    			"向左擦除", "wipeleft",
-    			"向右擦除", "wiperight",
-    			"向上擦除", "wipeup",
-    			"向下擦除", "wipedown",
-    			"左滑", "slideleft",
-    			"右滑", "slideright",
-    			"上滑", "slideup",
-    			"下滑", "slidedown",
-    			"圆形切割", "circlecrop",
-    			"方形切割", "rectcrop",
-    			"距离", "distance",
-    			"黑色渐变", "fadeblack",
-    			"白色渐变", "fadewhite",
-    			"镭射", "radial",
-    			"圆形打开", "circleopen",
-    			"圆形关闭", "circleclose",
-    			"溶解", "dissolve",
-    			"像素化", "pixelize"
-    			);
+    	Map<String, String> transitions = new HashMap<String, String>();
+    	transitions.put("无", null);
+    	transitions.put("渐隐", "fade");
+    	transitions.put("向左擦除", "wipeleft");
+    	transitions.put("向右擦除", "wiperight");
+    	transitions.put("向上擦除", "wipeup");
+    	transitions.put("向下擦除", "wipedown");
+    	transitions.put("左滑", "slideleft");
+    	transitions.put("右滑", "slideright");
+    	transitions.put("上滑", "slideup");
+    	transitions.put("下滑", "slidedown");
+    	transitions.put("圆形切割", "circlecrop");
+    	transitions.put("方形切割", "rectcrop");
+    	transitions.put("距离", "distance");
+    	transitions.put("黑色渐变", "fadeblack");
+    	transitions.put("白色渐变", "fadewhite");
+    	transitions.put("镭射", "radial");
+    	transitions.put("圆形打开", "circleopen");
+    	transitions.put("圆形关闭", "circleclose");
+    	transitions.put("溶解", "dissolve");
+    	transitions.put("像素化", "pixelize");
     	MenuItem item = (MenuItem) event.getSource();
-    	FormatButton.setText(item.getText());
+    	CatButton.setText(item.getText());
     	this.tab1OutputTran = transitions.get(item.getText());
     }
 
