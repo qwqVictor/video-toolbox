@@ -62,7 +62,7 @@ public class FFBridge {
 
     }
 
-    public Map<String, Object> probe(String inputFile) throws FFRuntimeException {
+    private Map<String, Object> probe(String inputFile) throws FFRuntimeException {
         Map<String, Object> ret = new HashMap<String, Object>();
         ProcessBuilder pBuilder = new ProcessBuilder();
         List<String> cmdArray = new ArrayList<String>();
