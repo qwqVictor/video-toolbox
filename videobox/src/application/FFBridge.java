@@ -223,14 +223,14 @@ public class FFBridge {
         pBuilder.command(cmdArray);
         try {
             Process p = pBuilder.start();
-            BufferedReader stdoutReader = p.inputReader();
+            BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
             while ((line = stdoutReader.readLine()) != null) {
                 System.out.println("Stdout: " + line);
             }
             p.waitFor();
             if (!p.isAlive() && p.exitValue() != 0) {
-                throw new FFRuntimeException(p.errorReader());
+                throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
             }
         } catch (IOException | InterruptedException e) {
             throw new FFRuntimeException(e.getMessage());
