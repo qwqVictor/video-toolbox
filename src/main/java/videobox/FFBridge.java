@@ -193,7 +193,7 @@ public class FFBridge {
      * @throws FFRuntimeException
      */
     public void cat(List<String> inputFiles, String outputFile, String transition) throws FFRuntimeException {
-        if (inputFiles.size() < 2) {
+        if (inputFiles.size() < 2) { // 若传入文件数量少于2个则无需合并，抛出异常
             throw new FFRuntimeException("No need to concentrate one video.");
         }
         ProcessBuilder pBuilder = new ProcessBuilder();
@@ -289,7 +289,7 @@ public class FFBridge {
                 throw new FFRuntimeException(new BufferedReader(new InputStreamReader(p.getErrorStream())));
             }
         } catch (IOException | InterruptedException e) {
-            throw new FFRuntimeException(e.getMessage()); //
+            throw new FFRuntimeException(e.getMessage());
         }
     }
 
@@ -357,31 +357,46 @@ public class FFBridge {
         }
     }
 
+    /**
+     * 分离视频画面和音轨
+     * 
+     * @param inputFiles 批量分离的文件列表
+     * @param outputPath 批量输出路径
+     * @throws FFRuntimeException
+     */
     public void splitAudio(List<String> inputFiles, String outputPath) throws FFRuntimeException {
         for (String file : inputFiles) {
-            String ext = getFileExtension(file);
-            getVideoOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file) + "_videoOnly", ext));
+            String ext = getFileExtension(file); // 通过 getFileExtension 获取视频扩展名，实现简洁不必赘述
+            getVideoOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file) + "_videoOnly", ext)); // 分离视频
             String audioExt = "m4a";
             boolean audioCopy = true;
-            if (ext.equals("wmv") || ext.equals("ogv")) {
+            if (ext.equals("wmv") || ext.equals("ogv")) { // 对于确定非 aac 编码使用 mp3 导出，不拷贝流
                 audioExt = "mp3";
                 audioCopy = false;
             }
-            getAudioOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file), audioExt), audioCopy);
+            getAudioOnly(file, getOutputFilePath(outputPath, getFileNameWithoutExtension(file), audioExt), audioCopy); // 分离音频
         }
     }
 
+    /**
+     * 整合视频画面和音轨
+     * 
+     * @param videoInputFiles 待批量整合的视频文件列表
+     * @param audioInputFiles 待批量整合的音频文件列表
+     * @param outputPath      批量输出路径
+     * @throws FFRuntimeException
+     */
     public void joinVideoAudio(List<String> videoInputFiles, List<String> audioInputFiles, String outputPath)
             throws FFRuntimeException {
-        if (videoInputFiles.size() != audioInputFiles.size()) {
+        if (videoInputFiles.size() != audioInputFiles.size()) { // 若待合并的视频和音频数量无法对应则抛出异常
             throw new FFRuntimeException("Video files and audio files mismatch!");
         }
         int length = videoInputFiles.size();
         for (int i = 0; i < length; i++) {
             ProcessBuilder pBuilder = new ProcessBuilder();
             List<String> cmdArray = new ArrayList<String>();
-            String videoFile = videoInputFiles.get(i), audioFile = audioInputFiles.get(i);
-            Map<String, Object> videoProbeResult = probe(videoFile), audioProbeResult = probe(audioFile);
+            String videoFile = videoInputFiles.get(i), audioFile = audioInputFiles.get(i); // 结对
+            Map<String, Object> videoProbeResult = probe(videoFile), audioProbeResult = probe(audioFile); // 首先探查文件信息
             cmdArray.add(FFmpegPath);
             cmdArray.add("-y"); // 覆盖文件
             cmdArray.add("-nostdin"); // 要求非交互式体验，避免 stdin 阻塞
@@ -391,13 +406,13 @@ public class FFBridge {
             cmdArray.add(audioFile);
             cmdArray.add("-vcodec");
             cmdArray.add("copy");
-            if (((String) audioProbeResult.get("codec_type")).equals("aac")) {
+            if (((String) audioProbeResult.get("codec_type")).equals("aac")) { // 若音频为 AAC 编码可直接拷贝流
                 cmdArray.add("-acodec");
                 cmdArray.add("copy");
             }
 
             cmdArray.add(getOutputFilePath(outputPath, getFileNameWithoutExtension(videoFile) + "_joined",
-                    getFileExtension(videoFile)));
+                    getFileExtension(videoFile))); // 根据原视频文件名加后缀输出
             System.out.println(String.join(" ", cmdArray));
             pBuilder.redirectErrorStream(true); // 进行错误流重定向避免缓冲区阻塞
             pBuilder.command(cmdArray); // 设置进程启动参数
